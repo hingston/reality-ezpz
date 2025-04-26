@@ -17,7 +17,7 @@ from telegram.ext import (
 token = os.environ["BOT_TOKEN"]
 admin = os.environ["BOT_ADMIN"]
 username_regex = re.compile("^[a-zA-Z0-9]+$")
-command = "bash <(curl -sL https://raw.githubusercontent.com/aleskxyz/reality-ezpz/master/reality-ezpz.sh) "
+command = "bash <(curl -sL https://raw.githubusercontent.com/hingston/reality-ezpz/refs/heads/update-images/reality-ezpz.sh) "
 
 
 class ScriptExecutionError(Exception):
