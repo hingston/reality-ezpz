@@ -970,21 +970,10 @@ EOF
 
 function generate_tgbot_dockerfile {
   cat >"${path[tgbot_dockerfile]}" << EOF
-FROM ${image[python]} AS builder
-WORKDIR /app
-RUN apk add --no-cache build-base
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-RUN pip install --no-cache-dir python-telegram-bot[callback-data]==22.5 qrcode[pil]==8.2
-
 FROM ${image[python]}
-ARG config_path=.
 WORKDIR ${config_path}/tgbot
-RUN apk add --no-cache libqrencode-tools openssl
-COPY --from=builder /opt/venv /opt/venv
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
-ENV PATH="/opt/venv/bin:$PATH"
+RUN apk add --no-cache docker-cli-compose curl bash newt libqrencode-tools sudo openssl jq zip unzip
+RUN pip install --no-cache-dir python-telegram-bot[callback-data]==22.5 qrcode[pil]==8.2
 CMD [ "python", "./tgbot.py" ]
 EOF
 }
